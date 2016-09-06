@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+/.idea/
+/config/target/
+/eureka/target/
+/gateway/target/
+/oauth-service/target/

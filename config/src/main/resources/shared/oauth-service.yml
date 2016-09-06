@@ -1,0 +1,9 @@
+spring:
+  datasource:
+         url: jdbc:postgresql://localhost:5432/allinse_dev
+         username: postgres
+         password: postgres
+         driver-class-name: org.postgresql.Driver
+server:
+  context-path: /uaa
+  port: 5000

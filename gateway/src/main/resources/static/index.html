@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/lib/jquery.min.js"></script>
+<script>
+    console.log("Start oauth!");
+    function requestOauthToken(username, password) {
+
+        var success = false;
+
+        $.ajax({
+            url: 'http://localhost:4000/uaa/oauth/token',
+            datatype: 'json',
+            type: 'post',
+            headers: {'Authorization': 'Basic YnJvd3Nlcjo='},
+            async: false,
+            data: {
+                scope: 'ui',
+                username: username,
+                password: password,
+                grant_type: 'password'
+            },
+            success: function (data) {
+                localStorage.setItem('token', data.access_token);
+                success = true;
+                console.log("Success oauth");
+            },
+            error: function () {
+                removeOauthTokenFromStorage();
+                console.log("Error oauth");
+            }
+        });
+
+        return success;
+    }
+
+   console.log(requestOauthToken('root', 'password'));
+
+    function removeOauthTokenFromStorage() {
+        return localStorage.removeItem('token');
+    }
+
+</script>
+Hello Christian!
+
+</body>
+</html>
