@@ -1,8 +1,10 @@
 package com.allinse.oauth.service;
 
+import com.allinse.oauth.entity.Users;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +14,10 @@ import org.springframework.stereotype.Service;
 public class AllinseUserDetailsService implements UserDetailsService {
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users users = new Users();
+        users.setUsername("root");
+        users.setPassword("acecom");
+        return users;
     }
 }
