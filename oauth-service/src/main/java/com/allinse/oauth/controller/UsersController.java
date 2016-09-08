@@ -2,6 +2,7 @@ package com.allinse.oauth.controller;
 /*
 import com.allinse.oauth.entity.Users;
 import com.allinse.oauth.service.UsersService;*/
+import com.allinse.oauth.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,8 @@ import java.security.Principal;
 @RequestMapping("/users")
 public class UsersController {
 
-    /*@Autowired
-    private UsersService usersService;*/
+    @Autowired
+    private UsersService usersService;
 
     @RequestMapping(value = "/current", method = RequestMethod.GET)
     public Principal getUser(Principal principal) {

@@ -7,13 +7,14 @@ import java.util.Set;
 /**
  * Created by allinse on 05.09.16.
  */
-/*
+
 public class Roles {
 
-
+    @Id
+    @GeneratedValue
     private Integer id;
 
-
+    @Column(name = "role")
     private String role;
 
     @OneToMany(cascade=CascadeType.ALL)
@@ -48,4 +49,3 @@ public class Roles {
         this.usersRoles = usersRoles;
     }
 }
-*/

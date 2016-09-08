@@ -4,9 +4,6 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=1150, user-scalable=no">
     <title>Piggy Metrics</title>
-    <link rel="stylesheet" type="text/css" href="css/launch.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/animation.css">
     <style>
         #bubble, #indicator, #save, #piggyicon, #rublesign, .arrowup, .arrowdown, .incomes-sprite-title, .close-sign, .modal-save-icon,
         #modaldeletecross, .initicons-arrow, .expenses-sprite-title, .savings-sprite-title, .triangle, .noUi-handle, .noUi-handle:after  {
@@ -45,11 +42,14 @@
                    grant_type: 'password'
                },
                success: function (data) {
-                   localStorage.setItem('token', data.access_token);
+                   sessionStorage.setItem('token', data.access_token);
                    success = true;
+                   var token = sessionStorage.getItem('token');
+                   console.log(token);
                },
                error: function () {
                    removeOauthTokenFromStorage();
+                   console.log("error Oauth2")
                }
            });
 
@@ -57,14 +57,16 @@
        }
 
        function getOauthTokenFromStorage() {
-           return localStorage.getItem('token');
+           return sessionStorage.getItem('token');
+
        }
 
        function removeOauthTokenFromStorage() {
-           return localStorage.removeItem('token');
+           return sessionStorage.removeItem('token');
        }
 
-       requestOauthToken('root', 'password');
+       requestOauthToken('root', 'acecom');
+       console.log(getOauthTokenFromStorage());
    </script>
 
 
