@@ -1,11 +1,4 @@
-spring:
-  jpa:
-      database: POSTGRESQL
-      show-sql: true
-      hibernate:
-              ddl-auto: create-drop
-
-  datasource:
+datasource:
          platform: postgres
          url: jdbc:postgresql://82.146.60.158:5432/allinse_dev
          username: allinse
