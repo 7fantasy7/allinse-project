@@ -7,7 +7,8 @@ import java.util.Set;
 /**
  * Created by allinse on 05.09.16.
  */
-
+@Entity
+@Table(name = "roles")
 public class Roles {
 
     @Id

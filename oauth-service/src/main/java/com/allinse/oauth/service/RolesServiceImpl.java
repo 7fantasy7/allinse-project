@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RolesServiceImpl implements RolesService {
 
-    @Autowired
+   @Autowired
     RolesRepository rolesRepository;
 
     @Override

@@ -40,6 +40,9 @@ public class AllinseUserDetailsService implements UserDetailsService {
                 new org.springframework.security.core.userdetails.User(user.getLogin(),
                         user.getPassword(),true, true,true, true,
                         GrantedRole);
+        if (userDetails == null) {
+            throw new UsernameNotFoundException(login);
+        }
         return userDetails;
 
     }

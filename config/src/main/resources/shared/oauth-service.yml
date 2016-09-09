@@ -1,9 +1,9 @@
-datasource:
-         platform: postgres
-         url: jdbc:postgresql://82.146.60.158:5432/allinse_dev
-         username: allinse
-         password: allinse1024
-         driver-class-name: org.postgresql.Driver
 server:
   context-path: /uaa
   port: 5000
+spring:
+    datasource:
+        driverClassName: org.postgresql.Driver
+        password: allinse1024
+        url: jdbc:postgresql://82.146.60.158:5432/allinse_dev
+        username: allinse
