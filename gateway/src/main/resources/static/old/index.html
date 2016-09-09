@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<htmL>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=1150, user-scalable=no">
+    <title>Piggy Metrics</title>
+    <style>
+        #bubble, #indicator, #save, #piggyicon, #rublesign, .arrowup, .arrowdown, .incomes-sprite-title, .close-sign, .modal-save-icon,
+        #modaldeletecross, .initicons-arrow, .expenses-sprite-title, .savings-sprite-title, .triangle, .noUi-handle, .noUi-handle:after  {
+            background-image: url("images/sprites.png");
+            background-size: 538px 84px;
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+        only screen and (min-resolution: 144dpi) {
+            #bubble, #indicator, #save, #piggyicon, #rublesign, .arrowup, .arrowdown, .incomes-sprite-title, .close-sign, .modal-save-icon,
+            #modaldeletecross, .initicons-arrow, .expenses-sprite-title, .savings-sprite-title, .triangle, .noUi-handle, .noUi-handle:after {
+                background-image: url("images/sprites@2x.png");
+            }
+        }
+    </style>
+</head>
+   <body>
+   <script src="js/lib/jquery.min.js"></script>
+   <script src="js/lib/touchscreens.js"></script>
+   <script src="js/lib/extrascripts.js"></script>
+
+   <script>
+       function requestOauthToken(username, password) {
+
+           var success = false;
+
+           $.ajax({
+               url: 'uaa/oauth/token',
+               datatype: 'json',
+               type: 'post',
+               headers: {'Authorization': 'Basic YnJvd3Nlcjo='},
+               async: false,
+               data: {
+                   scope: 'ui',
+                   username: username,
+                   password: password,
+                   grant_type: 'password'
+               },
+               success: function (data) {
+                   var token = document.cookie = "token="+data.access_token+"";
+                   success = true;
+                   //var token = document.cookie.('token');
+                   console.log(token);
+               },
+               error: function () {
+                   removeOauthTokenFromStorage();
+                   console.log("error Oauth2")
+               }
+           });
+
+           return success;
+       }
+
+       function getOauthTokenFromStorage() {
+
+           return document.cookie.getItem('token');
+
+       }
+
+       function removeOauthTokenFromStorage() {
+           return document.cookie.removeItem('token');
+       }
+
+       requestOauthToken('root', 'acecom');
+       console.log(getOauthTokenFromStorage());
+   </script>
+
+
+    </body>
+</html>

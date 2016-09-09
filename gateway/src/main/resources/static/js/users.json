@@ -1,0 +1,24 @@
+{                                           
+  "users": [1, {                                  
+      "userID": 1,                             
+      "name": "Иванов Василий",                
+      "abonement": "Тренажерный зал, СПА",     
+      "phone": "+7(380)999-5977",              
+      "photo": "https://farm8.staticflickr.com/7450/16495985065_d0a294a466.jpg",                
+      "lastVizit": "18:33 30.08.16"         
+}, {                                       
+      "userID": 2,                             
+      "name": "Харченко Маргарита",           
+      "abonement": "Массаж",                   
+      "phone": "+7(380)966-5911",              
+      "photo": "http://doramakun.ru/thumbs/users/21683/News/2014/February/Other2/Yi-Min-Jeong-500.jpg",                         
+      "lastVizit": "9:15 29.08.16"         
+}, {                                       
+      "userID": 3,                            
+      "name": "Полякова Ксения",           
+      "abonement": "СПА, массаж",             
+      "phone": "+7(380)919-1197", 
+      "photo": "http://maxibrand.com.ua/image/cache/data/8/32624725825-500x500.jpg",              "lastVizit": "14:53 30.08.16"                  
+    }],                                       
+  "orderCompleted": true                    
+}                                           
