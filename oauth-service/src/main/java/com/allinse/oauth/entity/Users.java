@@ -1,6 +1,8 @@
 package com.allinse.oauth.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 
 @Entity
@@ -32,6 +34,7 @@ public class Users {
     @Column(name = "avatar")
     private String avatar;
 
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name="users_roles",
             joinColumns = {@JoinColumn(name="user_id", referencedColumnName = "id")},
@@ -40,12 +43,12 @@ public class Users {
 
     private Roles roles;
 
-
     /**
      *
      * Getter and Setter
      */
 
+    @JsonView(View.UI.class)
     public Integer getId() {
         return id;
     }
@@ -54,6 +57,7 @@ public class Users {
         this.id = id;
     }
 
+    @JsonView(View.UI.class)
     public String getLogin() {
         return login;
     }
@@ -70,6 +74,7 @@ public class Users {
         this.password = password;
     }
 
+    @JsonView(View.UI.class)
     public String getFirstname() {
         return firstname;
     }
@@ -78,6 +83,7 @@ public class Users {
         this.firstname = firstname;
     }
 
+    @JsonView(View.UI.class)
     public String getLastname() {
         return lastname;
     }
@@ -86,6 +92,7 @@ public class Users {
         this.lastname = lastname;
     }
 
+    @JsonView(View.UI.class)
     public String getEmail() {
         return email;
     }
@@ -94,6 +101,7 @@ public class Users {
         this.email = email;
     }
 
+    @JsonView(View.UI.class)
     public String getPhone() {
         return phone;
     }
@@ -102,6 +110,7 @@ public class Users {
         this.phone = phone;
     }
 
+    @JsonView(View.UI.class)
     public String getAvatar() {
         return avatar;
     }
@@ -121,4 +130,5 @@ public class Users {
     public String getFullName(){
         return this.firstname + " " + this.lastname;
     }
+
 }

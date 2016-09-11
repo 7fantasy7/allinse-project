@@ -4,9 +4,10 @@ import com.allinse.oauth.entity.Users;
 import com.allinse.oauth.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.security.Principal;
 
 /**
  * Created by allinse on 05.09.16.
@@ -29,9 +30,10 @@ public class UsersServiceImpl implements UsersService {
         return usersRepository.findByLogin(login);
     }
 
+    @Override
     public Users getAuthenticationUser(){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Users users = getUserByLogin(user.getUsername());
+        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Users users = getUserByLogin(principal.getName());
         return users;
     }
 
@@ -39,4 +41,6 @@ public class UsersServiceImpl implements UsersService {
     public Users create(Users users) {
         return null;
     }
+
+
 }
