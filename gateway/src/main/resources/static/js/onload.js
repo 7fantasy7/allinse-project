@@ -3,7 +3,7 @@
  */
 function checkAuth(){
     //console.log(getOauthTokenFromStorage());
-    if(sessionStorage.getItem('token')==null) {
+    if(!sessionStorage.getItem('token')) {
         console.log("redirect login.html");
         //$(location).attr('href',"/login.html");
         window.location.replace("/login.html");

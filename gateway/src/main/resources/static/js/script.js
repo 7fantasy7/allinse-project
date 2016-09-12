@@ -63,16 +63,16 @@ var users = JSON.parse(jsonString);
     var success = false;
 
     $.ajax({
-      url: '/uaa/oauth/token',
+      url: 'http://localhost:4000/uaa/oauth/token',
       datatype: 'json',
       type: 'post',
       headers: {'Authorization': 'Basic YnJvd3Nlcjo='},
       async: false,
       data: {
+        grant_type: 'password',
         scope: 'ui',
         username: login,
-        password: password,
-        grant_type: 'password'
+        password: password
       },
       success: function (data) {
         sessionStorage.setItem("token", data.access_token);
@@ -117,7 +117,7 @@ function getCurrentAccount() {
 
   if (token) {
     $.ajax({
-      url: '/uaa/users/current',
+      url: 'http://localhost:4000/uaa/users/current',
       datatype: 'json',
       type: 'get',
       headers: {'Authorization': 'Bearer ' + token},
@@ -127,13 +127,12 @@ function getCurrentAccount() {
       },
       error: function () {
         removeOauthTokenFromStorage();
-        console.log("error");
       }
     });
   }
 
   return account;
 }
-var yourval = jQuery.parseJSON(JSON.stringify(getCurrentAccount()));
-
-console.log(yourval.lastname +" "+ yourval.firstname);
+console.log(getCurrentAccount());
+var users = JSON.parse(getCurrentAccount());
+console.log(users);
