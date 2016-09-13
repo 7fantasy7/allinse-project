@@ -41,5 +41,12 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+    personnel:
+        path: /personnel/**
+        serviceId: personnel
+        stripPrefix: false
+        sensitiveHeaders:
+
+
 server:
   port: 4000
