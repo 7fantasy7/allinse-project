@@ -9,5 +9,4 @@ import org.springframework.data.repository.CrudRepository;
 public interface CalendarRepository extends CrudRepository<Calendar, Long> {
 
     Iterable<Calendar> findAll();
-    void delete(Integer id);
 }

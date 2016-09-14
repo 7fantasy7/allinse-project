@@ -9,7 +9,7 @@ public interface CalendarService {
 
     public Iterable<Calendar> findAll();
 
-    public void deleteById(Integer id);
+    public void deleteById(Long id);
 
     public void save(Calendar calendar);
 }

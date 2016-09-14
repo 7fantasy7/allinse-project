@@ -30,7 +30,7 @@ public class CalendarController {
     }
 
     @RequestMapping(value = "/event/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteEvents(@PathVariable Integer id){
+    public void deleteEvents(@PathVariable Long id){
         calendarService.deleteById(id);
     }
 }

@@ -3,10 +3,12 @@ package com.allinse.personnel.service;
 import com.allinse.personnel.entity.Calendar;
 import com.allinse.personnel.repository.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by root on 13.09.2016.
  */
+@Service
 public class CalendarServiceImpl implements CalendarService {
 
     @Autowired
@@ -18,7 +20,7 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         calendarRepository.delete(id);
     }
 
