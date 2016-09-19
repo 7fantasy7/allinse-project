@@ -1,3 +1,12 @@
+security:
+  oauth2:
+    client:
+      clientId: personnel
+      clientSecret: passwd1024
+      accessTokenUri: http://localhost:5000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
 server:
   context-path: /personnel
   port: 6000

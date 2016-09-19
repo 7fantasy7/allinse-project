@@ -41,7 +41,12 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("browser")
                 .authorizedGrantTypes("refresh_token", "password")
-                .scopes("ui");
+                .scopes("ui")
+        .and()
+                .withClient("personnel")
+                .secret("passwd1024")
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server");
         // @formatter:on
     }
 

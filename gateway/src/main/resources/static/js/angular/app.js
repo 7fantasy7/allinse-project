@@ -35,8 +35,10 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
             }).success(function(data, status, headers, config) {
                 sessionStorage.setItem("token", data.access_token);
                 success = true;
-                getCurrentAccount();
+                getCallendar();
+                //getCurrentAccount();
                 //alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + getOauthTokenFromSession() + "</b>");
+                //getCallendar();
 
             }).error(function(data, status, headers, config) {
                 alertify.error("Invalid login: <b style='color: #3c3c3c'>"+login+"</b> or password: <b style='color: #3c3c3c'>"+password+"</b> <br/> status " + status);
@@ -70,6 +72,24 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
                     alertify.error("Access is denied " + status);
                 });
             }
+    }
+
+    function getCallendar() {
+
+        var token = getOauthTokenFromSession();
+
+        if(token) {
+            $http({
+                method: 'POST',
+                url: '/personnel/calendar/events',
+                headers: {'Authorization': 'Bearer ' + token},
+            }).success(function (data, status, headers, config) {
+                console.log("success get personnel/calendar/events");
+            }).error(function (status) {
+                removeOauthTokenFromSession();
+                alertify.error("Error get personnel/calendar/events ");
+            });
+        }
     }
 
 });
