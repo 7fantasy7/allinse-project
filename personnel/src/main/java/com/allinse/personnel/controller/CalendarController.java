@@ -3,7 +3,9 @@ package com.allinse.personnel.controller;
 import com.allinse.personnel.entity.Calendar;
 import com.allinse.personnel.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -22,10 +24,14 @@ public class CalendarController {
     }
 
     @RequestMapping(value = "/events/save", method = RequestMethod.POST)
-    public void saveEvents(@ModelAttribute(value = "data") Calendar calendar){
+    public ResponseEntity<Calendar> saveEvents(@RequestBody Calendar calendar){
+        try {
 
-        System.out.println(calendar.getType());
-        //calendarService.save(calendar);
+        } catch (){
+
+        }
+        calendarService.save(calendar);
+        return new ResponseEntity<Calendar>(calendar, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/event/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

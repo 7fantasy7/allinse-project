@@ -35,11 +35,10 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
             }).success(function(data, status, headers, config) {
                 sessionStorage.setItem("token", data.access_token);
                 success = true;
-                //getCallendar();
-                saveCalendar();
-                //getCurrentAccount();
-                //alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + getOauthTokenFromSession() + "</b>");
-                //getCallendar();
+                getCallendar();
+                saveCalendar("qweqeqeqe", "qweqe", "TYPE qdsadasd");
+                getCurrentAccount();
+                alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + getOauthTokenFromSession() + "</b>");
 
             }).error(function(data, status, headers, config) {
                 alertify.error("Invalid login: <b style='color: #3c3c3c'>"+login+"</b> or password: <b style='color: #3c3c3c'>"+password+"</b> <br/> status " + status);
@@ -67,7 +66,8 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
                     url: '/uaa/users/current',
                     headers: {'Authorization': 'Bearer ' + token},
                 }).success(function (data, status, headers, config) {
-                    window.location.replace("/index.html");
+                    //window.location.replace("/index.html");
+                    console.log(data);
                 }).error(function (status) {
                     removeOauthTokenFromSession();
                     alertify.error("Access is denied " + status);
@@ -85,11 +85,8 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
                 url: '/personnel/calendar/events',
                 headers: {'Authorization': 'Bearer ' + token}
             }).success(function (data, status, headers, config) {
-                console.log("success get personnel/calendar/events");
-                //var json = JSON.parse(data);
-                console.log(data[0].type);
-                console.log(data[0]);
                 console.log(data);
+                alertify.error("Success get full personnel/calendar/events ");
             }).error(function (response) {
                 //removeOauthTokenFromSession();
                 alertify.error("Error get personnel/calendar/events ");
@@ -97,7 +94,7 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
         }
     }
 
-    function saveCalendar() {
+    function saveCalendar(start, end, type) {
 
         var token = getOauthTokenFromSession();
 
@@ -106,18 +103,16 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
                 method: 'POST',
                 url: '/personnel/calendar/events/save',
                 headers: {'Authorization': 'Bearer ' + token},
-                data: $httpParamSerializerJQLike({
-                    id: 2,
-                    start: '12.12.1993 21:02:01',
-                    end: '13.12.1993 21:02:01',
-                    type: 'TEST CALENDAR'
-                })
+                data: {
+                    start: start,
+                    end: end,
+                    type: type
+                }
             }).success(function (data, status, headers, config) {
                 console.log("success save personnel/calendar/events/save");
-                alertify.success("success save personnel/calendar/save ")
+                alertify.success("success save Calendar Status: " + status)
             }).error(function (status) {
-                //removeOauthTokenFromSession();
-                alertify.error("Error get personnel/calendar/events ");
+                alertify.error("Error save personnel/calendar/save  ");
             });
         }
     }
