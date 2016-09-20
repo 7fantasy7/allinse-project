@@ -1,8 +1,6 @@
 package com.allinse.personnel.entity;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
-import java.sql.Date;
 
 /**
  * Created by root on 13.09.2016.
@@ -15,10 +13,10 @@ public class Calendar {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "start")
+    @Column(name = "start_time")
     private String start;
 
-    @Column(name = "end")
+    @Column(name = "end_time")
     private String end;
 
     @Column(name = "type")

@@ -35,7 +35,8 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
             }).success(function(data, status, headers, config) {
                 sessionStorage.setItem("token", data.access_token);
                 success = true;
-                getCallendar();
+                //getCallendar();
+                saveCalendar();
                 //getCurrentAccount();
                 //alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + getOauthTokenFromSession() + "</b>");
                 //getCallendar();
@@ -82,11 +83,40 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
             $http({
                 method: 'POST',
                 url: '/personnel/calendar/events',
-                headers: {'Authorization': 'Bearer ' + token},
+                headers: {'Authorization': 'Bearer ' + token}
             }).success(function (data, status, headers, config) {
                 console.log("success get personnel/calendar/events");
+                //var json = JSON.parse(data);
+                console.log(data[0].type);
+                console.log(data[0]);
+                console.log(data);
+            }).error(function (response) {
+                //removeOauthTokenFromSession();
+                alertify.error("Error get personnel/calendar/events ");
+            });
+        }
+    }
+
+    function saveCalendar() {
+
+        var token = getOauthTokenFromSession();
+
+        if(token) {
+            $http({
+                method: 'POST',
+                url: '/personnel/calendar/events/save',
+                headers: {'Authorization': 'Bearer ' + token},
+                data: $httpParamSerializerJQLike({
+                    id: 2,
+                    start: '12.12.1993 21:02:01',
+                    end: '13.12.1993 21:02:01',
+                    type: 'TEST CALENDAR'
+                })
+            }).success(function (data, status, headers, config) {
+                console.log("success save personnel/calendar/events/save");
+                alertify.success("success save personnel/calendar/save ")
             }).error(function (status) {
-                removeOauthTokenFromSession();
+                //removeOauthTokenFromSession();
                 alertify.error("Error get personnel/calendar/events ");
             });
         }
