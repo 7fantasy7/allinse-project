@@ -64,7 +64,7 @@ app.controller('OAuth2Controller', function ($scope, $http, $httpParamSerializer
                 $http({
                     method: 'GET',
                     url: '/uaa/users/current',
-                    headers: {'Authorization': 'Bearer ' + token},
+                    headers: {'Authorization': 'Bearer ' + token}
                 }).success(function (data, status, headers, config) {
                     //window.location.replace("/index.html");
                     console.log(data);
