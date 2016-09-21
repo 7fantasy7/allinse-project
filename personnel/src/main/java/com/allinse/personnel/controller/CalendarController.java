@@ -24,13 +24,13 @@ public class CalendarController {
     }
 
     @RequestMapping(value = "/events/save", method = RequestMethod.POST)
-    public ResponseEntity<Calendar> saveEvents(@RequestBody Calendar calendar){
+    public ResponseEntity<Calendar> saveEvents(@RequestBody Calendar calendar) {
         try {
-
-        } catch (){
-
+           calendarService.save(calendar);
+        } catch (Error e){
+            return new ResponseEntity<Calendar>(calendar, HttpStatus.BAD_REQUEST);
         }
-        calendarService.save(calendar);
+
         return new ResponseEntity<Calendar>(calendar, HttpStatus.OK);
     }
 
