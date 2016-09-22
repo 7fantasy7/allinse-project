@@ -94,6 +94,9 @@
                                 <jsSourceInclude>particles/app.js</jsSourceInclude>
                                 <jsSourceInclude>angular/**</jsSourceInclude>
                             </jsSourceIncludes>
+                            <jsSourceExcludes>
+                                <jsSourceExclude>angular/*.min.js</jsSourceExclude>
+                            </jsSourceExcludes>
 
                             <jsTargetDir>static/js</jsTargetDir>
                             <jsFinalFile>scripts.js</jsFinalFile>
@@ -104,7 +107,7 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
-                    <!-- more execution statements -->
+                     <!--more execution statements-->
                 </executions>
             </plugin>
         </plugins>
