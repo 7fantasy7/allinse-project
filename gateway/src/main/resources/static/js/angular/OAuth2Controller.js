@@ -32,6 +32,7 @@ app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, $httpP
             })
         }).success(function(data, status, headers, config) {
             sessionStorage.setItem("token", data.access_token);
+            console.log(data.access_token);
             getCurrentAccount();
 
         }).error(function(data, status, headers, config) {

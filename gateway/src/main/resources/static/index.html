@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
 
@@ -108,12 +108,20 @@
 				</div>
 
 <!-- КОНТЕНТ -->
+
 				<div ui-view></div>
+
 <!-- КОНЕЦ КОНТЕНТА -->
 			</div>
 		</div>
 	</div>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+	<script src="js/angular/app.js"></script>
+	<script src="js/angular/OAuth2Controller.js"></script>
+	<script src="js/angular/TokenFactory.js"></script>
+	<script src="js/angular/FullCalendarController.js"></script>
+	<script src="js/angular/CheckAuthFactory.js"></script>
 
 	<!-- Optimized loading JS Start -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
