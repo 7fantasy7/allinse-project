@@ -1,0 +1,56 @@
+
+#calendar, #list{
+	background-color: #fff;
+	margin-top: 70px;
+	padding: 12px;
+}
+.placeholder {
+	min-height: 20px;
+	background-color: yellow; /* задний фон сортировки*/
+}
+#calendar{
+	margin-left: 12%;
+	width: 90%;
+}
+#list {
+	float: left;
+	margin-left: 12%;
+	width: 240px;
+}
+
+#sortable-events {
+	list-style-type: none;
+}
+
+#sortable-events, #external-events {
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	background: #eee;
+	text-align: left;
+}
+
+#sortable-events h4, #external-events h4 {
+	font-size: 16px;
+	margin-top: 0;
+	padding-top: 1em;
+}
+
+.sortable-event, .external-event {
+	margin: 10px 0;
+	padding: 2px 4px;
+	background: #3366CC;
+	color: #fff;
+	font-size: .85em;
+	cursor: pointer;
+}
+
+#external-events p {
+	margin: 1.5em 0;
+	font-size: 11px;
+	color: #666;
+}
+
+#external-events p input {
+	margin: 0;
+	vertical-align: middle;
+}

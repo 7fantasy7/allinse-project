@@ -1,204 +1,173 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>FullCalendar</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel='stylesheet' type='text/css' href='css/style.css' />
-        <link rel='stylesheet' type='text/css' href='css/fullcalendar.css' />
-        <link rel='stylesheet' type='text/css' href='css/jquery-ui-1.8.11.custom.css' />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-        <script src="js/jquery-ui-1.8.11.custom.min.js"></script>
-        <script src='js/fullcalendar.min.js'></script>
-        <script src="js/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            /* глобальные переменные */
-            var event_start = $('#event_start');
-            var event_end = $('#event_end');
-            var event_type = $('#event_type');
-            var calendar = $('#calendar');
-            var form = $('#dialog-form');
-            var event_id = $('#event_id');
-            var format = "MM/dd/yyyy HH:mm";
-            /* кнопка добавления события */
-            $('#add_event_button').button().click(function(){
-                formOpen('add');
-            });
-            /** функция очистки формы */
-            function emptyForm() {
-                event_start.val("");
-                event_end.val("");
-                event_type.val("");
-                event_id.val("");
-            }
-            /* режимы открытия формы */
-            function formOpen(mode) {
-                if(mode == 'add') {
-                    /* скрываем кнопки Удалить, Изменить и отображаем Добавить*/
-                    $('#add').show();
-                    $('#edit').hide();
-                    $("#delete").button("option", "disabled", true);
-                }
-                else if(mode == 'edit') {
-                    /* скрываем кнопку Добавить, отображаем Изменить и Удалить*/
-                    $('#edit').show();
-                    $('#add').hide();
-                    $("#delete").button("option", "disabled", false);
-                }
-                form.dialog('open');
-            }
-            /* инициализируем Datetimepicker */
-            event_start.datetimepicker({hourGrid: 4, minuteGrid: 10, dateFormat: 'mm/dd/yy'});
-            event_end.datetimepicker({hourGrid: 4, minuteGrid: 10, dateFormat: 'mm/dd/yy'});
-            /* инициализируем FullCalendar */
-            calendar.fullCalendar({
-                firstDay: 1,
-                height: 500,
-                editable: true,
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-                monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.'],
-                dayNames: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
-                dayNamesShort: ["ВС","ПН","ВТ","СР","ЧТ","ПТ","СБ"],
-                buttonText: {
-                    prev: "&nbsp;&#9668;&nbsp;",
-                    next: "&nbsp;&#9658;&nbsp;",
-                    prevYear: "&nbsp;&lt;&lt;&nbsp;",
-                    nextYear: "&nbsp;&gt;&gt;&nbsp;",
-                    today: "Сегодня",
-                    month: "Месяц",
-                    week: "Неделя",
-                    day: "День"
-                },
-                /* формат времени выводимый перед названием события*/
-                timeFormat: 'H:mm',
-                /* обработчик события клика по определенному дню */
-                dayClick: function(date, allDay, jsEvent, view) {
-                    var newDate = $.fullCalendar.formatDate(date, format);
-                    event_start.val(newDate);
-                    event_end.val(newDate);
-                    formOpen('add');
-                },
-                /* обработчик кликак по событияю */
-                eventClick: function(calEvent, jsEvent, view) {
-                    event_id.val(calEvent.id);
-                    event_type.val(calEvent.title);
-                    event_start.val($.fullCalendar.formatDate(calEvent.start, format));
-                    event_end.val($.fullCalendar.formatDate(calEvent.end, format));
-                    formOpen('edit');
-                },
-                /* источник записей */
-                eventSources: [{
-                    url: 'ajax.php',
-                    type: 'POST',
-                    data: {
-                        op: 'source'
-                    },
-                    error: function() {
-                        alert('Ошибка соединения с источником данных!');
-                    }
-                }]
-            });
-            /* обработчик формы добавления */
-            form.dialog({ 
-                autoOpen: false,
-                buttons: [{
-                    id: 'add',
-                    text: 'Добавить',
-                    click: function() {
-                        $.ajax({
-                            type: "POST",
-                            url: "ajax.php",
-                            data: {
-                                start: event_start.val(),
-                                end: event_end.val(),
-                                type: event_type.val(),
-                                op: 'add'
-                            },
-                            success: function(id){
-                                calendar.fullCalendar('renderEvent', {
-                                                                        id: id,
-                                                                        title: event_type.val(),
-                                                                        start: event_start.val(),
-                                                                        end: event_end.val(),
-                                                                        allDay: false
-                                                                    });
-                                
-                            }
-                        });
-			emptyForm();
-                    }
-                },
-                {   id: 'edit',
-                    text: 'Изменить',
-                    click: function() {
-                        $.ajax({
-                            type: "POST",
-                            url: "ajax.php",
-                            data: {
-                                id: event_id.val(),
-                                start: event_start.val(),
-                                end: event_end.val(),
-                                type: event_type.val(),
-                                op: 'edit'
-                            },
-                            success: function(id){
-                                calendar.fullCalendar('refetchEvents');
-                                
-                            }
-                        });
-                        $(this).dialog('close');
-			emptyForm();
-                    }
-                },
-                {   id: 'cancel',
-                    text: 'Отмена',
-                    click: function() { 
-                        $(this).dialog('close');
-                        emptyForm();
-                    }
-                },
-                {   id: 'delete',
-                    text: 'Удалить',
-                    click: function() { 
-                        $.ajax({
-                            type: "POST",
-                            url: "ajax.php",
-                            data: {
-                                id: event_id.val(),
-                                op: 'delete'
-                            },
-                            success: function(id){
-                                calendar.fullCalendar('removeEvents', id);
-                            }
-                        });
-                        $(this).dialog('close');
-                        emptyForm();
-                    },
-                    disabled: true
-                }]
-            });
-	});
-        </script>
-    </head>
-    <body>
-        <div id="calendar"></div>
-        <button id="add_event_button">Добавить событие</button>
-        <div id="dialog-form" title="Событие">
-            <p class="validateTips"></p>
-            <form>
-                <p><label for="event_type">Тип события</label>
-                <input type="text" id="event_type" name="event_type" value=""></p>
-                <p><label for="event_start">Начало</label>
-                <input type="text" name="event_start" id="event_start"/></p>
-                <p><label for="event_end">Конец</label>
-                <input type="text" name="event_end" id="event_end"/></p>
-                <input type="hidden" name="event_id" id="event_id" value="">
-            </form>
-        </div>
-    </body>
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>allInSe</title>
+	<meta name="description" content="">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Template Basic Images Start -->
+	<meta property="og:image" content="path/to/image.jpg">
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="css/component.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/media.css">
+	<!-- Header & Sidebar -->
+	<link rel="stylesheet" href="css/fixedcss/header.css">
+	<link rel="stylesheet" href="css/fixedcss/search-cloud.css">
+	<link rel="stylesheet" href="css/fixedcss/side-menu.css">
+	<!-- Calendar -->
+	<link rel="stylesheet" href="css/calendarcss/calendar.css">
+	<link rel="stylesheet" href="css/calendarcss/jquery-ui.css">
+	<!-- Library -->
+	<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="libs/bootstrap/bootstrap.css">
+	<link rel="stylesheet" href="libs/bootstrap/bootstrap-theme.css">
+	<link rel="stylesheet" href="libs/fullcalendar/dist/fullcalendar.css">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+	<!-- Custom HTML -->
+	<div class="page-wrapper container-fluid">
+		<div class="row">
+			<!-- Сайдбар -->
+			<div class="navigation ">
+				<span>Навигация</span>
+				<ul class="navigation-list">
+					<li><a href="index.html"><i class="fa fa-home"></i>Главная</a></li>
+					<li><a href="#"><i class="fa fa-group"></i>Клиенты</a></li>
+					<li><a href="#"><i class="fa fa-rub"></i>Финансы</a></li>
+					<li><a href="#"><i class="fa fa-street-view"></i>Персонал</a></li>
+					<li><a href="calendar.html"><i class="fa fa-calendar"></i>Календарь</a></li>
+					<li><a href="#"><i class="fa fa-bullhorn"></i>Администрирование</a></li>
+					<li><a href="#"><i class="fa fa-cogs"></i>Настройки</a></li>
+				</ul>
+			</div>
+
+			<!-- Контент -->
+			<div class="main-content col-sm-12 col-md-12 col-lg-12">
+				<!-- Шапка -->
+				<div class="header row">
+					<div class="logo hidden-xs hidden-sm col-md-2 col-lg-2">
+						<img src="img/logo.png" alt="">
+					</div>
+					<div class="leftside col-xs-5 col-sm-5 col-md-4 col-lg-4">
+						<div class="toggle-box"><a href="#" class="toggle-mnu"><i class="fa fa-bars"></i></a></div>
+						<div class="search">
+							<a href="#" class="advanced-search"><i class="fa fa-sliders"></i></a>
+							<i class="fa fa-search"></i>
+							<input type="search" placeholder="search">
+						</div>
+						<div class="search-cloud">
+							<span class="input input--fumi">
+								<input class="input__field input__field--fumi" id="input-23" type="text">
+								<label class="input__label input__label--fumi" for="input-23">
+									<span class="input__label-content input__label-content--fumi">Поиск по тегу</span>
+								</label>
+							</span>
+							<span class="input input--fumi">
+								<input class="input__field input__field--fumi" id="input-23" type="text">
+								<label class="input__label input__label--fumi" for="input-23">
+									<span class="input__label-content input__label-content--fumi">Поиск по имени</span>
+								</label>
+							</span>
+						<button>поиск</button>
+						</div>
+					</div>
+					<div class="rightside col-xs-7 col-sm-7 col-md-6 col-lg-6">
+						<div class="notification">
+							<a href="#" class=""><i class="fa fa-envelope"></i></a>
+							<a href="#" class=""><i class="fa fa-bell"></i></a>
+						</div>
+						<div class="account hidden-xs">
+							<img src="img/coffee.png" alt="">
+							<span>Александр Майстер</span>
+							<span class="caret"></span>
+						</div>
+						<div class="acc-cloud">
+							<a href="#">Профиль</a>
+							<a href="#">Редактировать</a>
+							<a href="#">Настройки</a>
+							<hr>
+							<a href="#">Выход</a>
+						</div>
+					</div>
+				</div>
+
+<!-- КОНТЕНТ -->
+	<section class="container" id="crm-calendar">
+			<div id='calendar' class="col-md-12 col-lg-11"></div>
+
+			<div id="dialog">
+				<form>
+					<div class="form-group">
+						<label for="event-type">Услуга</label>
+						<input type="text" id="event-type" class="form-control" placeholder="Услуга">
+					</div>
+					<div class="form-group">
+						<label for="event-title">Инициалы</label>
+						<input type="text" class="form-control" id="event-title" placeholder="Ф.И.О">
+					</div>
+					<div class="form-group">
+						<label for="event-start">Начало события</label>
+						<input type="text" class="form-control datepicker" id="event-start" placeholder="Начало">
+					</div>
+					<div class="form-group">
+						<label for="event-end">Конец события</label>
+						<input type="text" class="form-control datepicker" id="event-end" placeholder="Конец">
+					</div>
+				</form>
+			</div>
+	</section>
+
+
+<!-- КОНЕЦ КОНТЕНТА -->
+			</div>
+		</div>
+	</div>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+	<!-- Optimized loading JS Start -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	<script src="js/calendar.js"></script>
+	<script src="js/classie.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/search.js"></script>
+	<script src="js/script.js"></script>
+	<script src="libs/moment/min/moment.min.js"></script>
+	<script src="libs/fullcalendar/dist/fullcalendar.min.js"></script>
+	<script src="libs/fullcalendar/dist/locale-all.js"></script>
+	<script src="libs/bootstrap/bootstrap.js"></script>
+	<script src="libs/modernizr.custom.js"></script>
+	<script>var scr = {"scripts":[
+		{"src" : "js/calendar.js"},
+		{"src" : "js/classie.js",
+		{"src" : "js/common.js",
+		{"src" : "js/search.js"},
+		{"src" : "js/script.js"},
+		{"src" : "libs/moment/min/moment.min.js"},
+		{"src" : "libs/fullcalendar/dist/fullcalendar.min.js"},
+		{"src" : "libs/fullcalendar/dist/locale-all.js"},
+		{"src" : "libs/bootstrap/bootstrap.js"},
+		{"src" : "libs/modernizr.custom.js"}
+		]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
+	</script>
+	<!-- Optimized loading JS End -->
+</body>
 </html>

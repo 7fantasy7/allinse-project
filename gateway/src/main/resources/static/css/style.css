@@ -1,3 +1,4 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:400';
 body {
     font-family: Roboto, sans-serif;
 }
@@ -63,3 +64,43 @@ border-radius: 10px 10px 0px 0px;
     font-weight:100;
 }
 
+
+h4{
+    font-weight: 600 !important;
+}
+#new-btn {
+    background: #048a7c;
+    color: white;
+}
+.all-inform {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 100px;
+    font-family: 'Open Sans', sans-serif;
+}
+#inform-about, #user-interface, #left-table {
+    margin-bottom: 6px;
+    padding: 1em;
+    border: 1px solid #c0c0c0;
+    overflow: hidden;
+    background: white;
+    z-index: 0; 
+}
+#inform-about, #user-interface {
+    margin-left: 6px;
+}
+#user-interface  {
+    text-align: left;
+    margin-bottom: 6px;
+}
+.profile {
+    color:black;
+    padding-left:1em;
+    padding-right:1em;
+}
+.ui-photo {
+    width:95px;
+    border-radius:100em;
+    margin-top:1em;
+    margin-bottom:0.5em;
+}

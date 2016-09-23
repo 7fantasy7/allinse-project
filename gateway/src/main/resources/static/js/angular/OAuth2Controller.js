@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('OAuth2Controller', function ($scope, $http, $mediator, $httpParamSerializerJQLike) {
+app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, $httpParamSerializerJQLike) {
 
     $scope.userData = {};
 
@@ -18,8 +18,7 @@ app.controller('OAuth2Controller', function ($scope, $http, $mediator, $httpPara
      * @returns {boolean}
      */
     function login(login, password) {
-
-        var success = false;
+        
 
         $http({
             method: 'POST',
@@ -33,23 +32,18 @@ app.controller('OAuth2Controller', function ($scope, $http, $mediator, $httpPara
             })
         }).success(function(data, status, headers, config) {
             sessionStorage.setItem("token", data.access_token);
-            success = true;
-            /*getCallendar();
-            saveCalendar("qweqeqeqe", "qweqe", "TYPE qdsadasd");*/
             getCurrentAccount();
-            alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + getOauthTokenFromSession() + "</b>");
 
         }).error(function(data, status, headers, config) {
             alertify.error("Invalid login: <b style='color: #3c3c3c'>"+login+"</b> or password: <b style='color: #3c3c3c'>"+password+"</b> <br/> status " + status);
         });
-
-        return console.log(success);
+        
 
     }
 
     function getCurrentAccount() {
 
-        var token = $mediator.getOauthTokenFromSession();
+        var token = tokenFactory.getOauthTokenFromSession;
         console.log(token);
 
         if(token) {
@@ -58,15 +52,14 @@ app.controller('OAuth2Controller', function ($scope, $http, $mediator, $httpPara
                 url: '/uaa/users/current',
                 headers: {'Authorization': 'Bearer ' + token}
             }).success(function (data, status, headers, config) {
-                //window.location.replace("/index.html");
+                alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + tokenFactory.getOauthTokenFromSession + "</b>");
+                window.location.replace("/index.html");
                 console.log(data);
             }).error(function (status) {
-                $mediator.removeOauthTokenFromSession();
+                tokenFactory.removeOauthTokenFromSession;
                 alertify.error("Access is denied " + status);
             });
         }
     }
-
-
 
 });

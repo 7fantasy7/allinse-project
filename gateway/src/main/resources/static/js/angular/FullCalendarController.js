@@ -1,10 +1,10 @@
 /**
  * Created by root on 22.09.2016.
  */
-app.controller('FullCalendarController', function ($scope, $http,$mediator, $httpParamSerializerJQLike) {
+app.controller('FullCalendarController', function ($scope, $http, tokenFactory, $httpParamSerializerJQLike) {
     function getCallendar() {
 
-        var token = $mediator.getOauthTokenFromSession();
+        var token = tokenFactory.getOauthTokenFromSession;
 
         if(token) {
             $http({
@@ -15,7 +15,6 @@ app.controller('FullCalendarController', function ($scope, $http,$mediator, $htt
                 console.log(data);
                 alertify.error("Success get full personnel/calendar/events ");
             }).error(function (response) {
-                //removeOauthTokenFromSession();
                 alertify.error("Error get personnel/calendar/events ");
             });
         }
@@ -23,7 +22,7 @@ app.controller('FullCalendarController', function ($scope, $http,$mediator, $htt
 
     function saveCalendar(start, end, type) {
 
-        var token = $mediator.getOauthTokenFromSession();
+        var token = tokenFactory.getOauthTokenFromSession;
 
         if(token) {
             $http({

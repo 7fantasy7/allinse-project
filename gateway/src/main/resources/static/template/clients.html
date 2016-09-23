@@ -1,0 +1,71 @@
+
+<div class="all-inform">
+    <div class="row">
+        <!-- ВКЛАДКИ -->
+        <div id="left-table" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-md-offset-2  wow fadeInLeft">
+
+            <ul class="nav nav-tabs" role="tablist" id="myTabExample">
+                <li class="active"><a href="#homeExample" role="tab" data-toggle="tab"><i class="fa fa-plus"></i></a></li>
+                <li><a href="#questionsExample" role="tab" data-toggle="tab">Клиенты</a></li>
+            </ul>
+            <!-- КОНЕЦ ВКЛАДОК -->
+
+            <!-- Содержимое вкладок -->
+            <div class="tab-content">
+                <!-- Содержимое 1 вкладки -->
+                <div class="tab-pane active" id="homeExample">
+
+                    <label for="name-fr">Имя, Фамилия</label>
+                    <input type="text" class="form-control" placeholder="Иван Иванов" id="name-fr">
+
+                    <label for="age-fr">Возраст</label>
+                    <input type="text" class="form-control" placeholder="30 лет" id="age-fr">
+
+                    <label for="phone-fr">Телефон</label>
+                    <input type="tel" class="form-control" placeholder="+7" id="phone-fr">
+
+                    <label for="date-fr">Дата</label>
+                    <input type="date" class="form-control" id="date-fr">
+
+                    <button type="submit" id="new-btn" class="btn btn-default">Добавить</button>
+                </div>
+                <!-- Содержимое 2 вкладки -->
+                <div class="tab-pane active" id="questionsExample">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Имя</th>
+                            <th>Телефон</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+            <div class="row">
+                <div id="user-interface" class="col-md-12 ">
+                    <div class="col-sm-7 col-xs-8">
+                        <h4>Иванов Василий</h4>
+                        <b>Возраст:</b><p id="age">25 лет</p>
+                        <b>Услуги:</b><p id="abonement"> Тренажерный зал, СПА</p>
+                        <b>Телефон:</b><p id="phone"> +7(380)999-5977</p>
+                    </div>
+
+                    <div class="col-sm-5 col-xs-4">
+                        <p style="text-align:right"><img class="ui-photo" src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png" /></p>
+                    </div>
+                </div>
+                <div id="inform-about" class="col-md-12">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

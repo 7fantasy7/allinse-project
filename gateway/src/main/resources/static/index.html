@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-<script src="js/onload.js"></script>
-<script>checkAuth();</script>
+
 <head>
 
 	<meta charset="utf-8">
@@ -28,6 +27,7 @@
 	<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="libs/bootstrap/bootstrap.css">
 	<link rel="stylesheet" href="libs/bootstrap/bootstrap-theme.css">
+	<link rel="stylesheet" href="libs/fullcalendar/dist/fullcalendar.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +35,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<script src="old/js/lib/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -47,11 +47,11 @@
 			<div class="navigation ">
 				<span>Навигация</span>
 				<ul class="navigation-list">
-					<li><a href="#"><i class="fa fa-home"></i>Главная</a></li>
+					<li><a href="index.html"><i class="fa fa-home"></i>Главная</a></li>
 					<li><a href="#"><i class="fa fa-group"></i>Клиенты</a></li>
 					<li><a href="#"><i class="fa fa-rub"></i>Финансы</a></li>
 					<li><a href="#"><i class="fa fa-street-view"></i>Персонал</a></li>
-					<li><a href="#"><i class="fa fa-calendar"></i>Календарь</a></li>
+					<li><a href="calendar.html"><i class="fa fa-calendar"></i>Календарь</a></li>
 					<li><a href="#"><i class="fa fa-bullhorn"></i>Администрирование</a></li>
 					<li><a href="#"><i class="fa fa-cogs"></i>Настройки</a></li>
 				</ul>
@@ -102,29 +102,29 @@
 							<a href="#">Редактировать</a>
 							<a href="#">Настройки</a>
 							<hr>
-							<a href="/login.html" onclick="removeOauthTokenFromStorage()">Выход</a>
+							<a href="#">Выход</a>
 						</div>
 					</div>
 				</div>
 
 <!-- КОНТЕНТ -->
-
-			<div class="all-inform">
-				<div class="row"></div>
-			</div>
-
+				<div ui-view></div>
 <!-- КОНЕЦ КОНТЕНТА -->
 			</div>
 		</div>
 	</div>
+
+
 	<!-- Optimized loading JS Start -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script>var scr = {"scripts":[
 		{"src" : "js/classie.js", "async" : false},
 		{"src" : "js/common.js", "async" : false},
+		{"src" : "js/search.js", "async" : false},
+		{"src" : "js/script.js", "async" : false},
+		{"src" : "libs/bootstrap/bootstrap.js", "async" : false},
 		{"src" : "libs/modernizr.custom.js", "async" : false}
-		{"src" : "libs/bootstrap/bootstrap.js", "async" : false}
-	]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
+		]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
 	</script>
 	<!-- Optimized loading JS End -->
 </body>

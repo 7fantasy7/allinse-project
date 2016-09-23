@@ -270,7 +270,6 @@ input.gn-search:focus {
 .gn-menu-wrapper.gn-open-all .gn-submenu li {
 		height: 60px
 }
-
 @media screen and (max-width: 422px) { 
 	.gn-menu-wrapper.gn-open-all {
 			-webkit-transform: translateX(0px);

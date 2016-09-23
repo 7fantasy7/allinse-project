@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.factory('$mediator', function ($rootScope) {
+app.factory('tokenFactory', function ($rootScope) {
 
     function getOauthTokenFromSession() {
         return sessionStorage.getItem('token');
@@ -11,6 +11,11 @@ app.factory('$mediator', function ($rootScope) {
 
     function removeOauthTokenFromSession() {
         return sessionStorage.removeItem('token');
+    }
+    
+    return {
+        getOauthTokenFromSession: getOauthTokenFromSession(),
+        removeOauthTokenFromSession: removeOauthTokenFromSession()
     }
 
 });
