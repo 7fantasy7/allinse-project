@@ -12,7 +12,6 @@ app.config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
             .state('loadApp', {
                 url: '/',
-                //abstract: true,
                 views: {
                     'headerLayout': {
                         templateUrl: 'template/layout/loadHeader.html'
@@ -22,27 +21,34 @@ app.config(['$stateProvider', '$urlRouterProvider',
                     }
                 }
             })
-            /*.state('app', {
-                url: '',
-                //abstract: true,
-                templateUrl: 'mainLayout.html'
-            })
-            .state('OAuth2', {
-                url: '',
-                abstract: true,
-                templateUrl: 'loginLayout.html'
-            })*/
             .state('signin', {
-                url: '/login',
+                url: '/sign-in',
                 views: {
                     'headerLayout': {
-                        templateUrl: 'template/layout/loginHeader.html'
-                    },
-                    'view1': {
-                        templateUrl: 'template/login.html'
+                        templateUrl: 'template/layout/login/loginHeader.html'
                     },
                     'footerLayout': {
-                        templateUrl: 'template/layout/loginFooter.html'
+                        templateUrl: 'template/layout/login/loginFooter.html'
+                    },
+                    'content': {
+                        templateUrl: 'template/layout/login/login.html',
+                        controller: 'OAuth2Controller'
+                    }
+
+                }
+
+            })
+            .state('clients', {
+                url: '/clients',
+                view: {
+                    'headerLayout': {
+                        templateUrl: 'template/layout/appHeader.html'
+                    },
+                    'footerLayout': {
+                        templateUrl: 'template/layout/appFooter.html'
+                    },
+                    'content': {
+                        templateUrl: 'template/layout/clients/clients.html'
                     }
                 }
             })

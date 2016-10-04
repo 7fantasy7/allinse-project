@@ -3,13 +3,16 @@
  */
 'use strict';
 
-app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, $httpParamSerializerJQLike) {
+app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, particlesFactory, $httpParamSerializerJQLike) {
 
     $scope.userData = {};
 
     $scope.auth = function () {
         login($scope.userData.login, $scope.userData.password);
     };
+    particlesFactory.particlesRun;
+    console.log("hello");
+
 
     /**
      *  Getting a token from the OAuth2 services
