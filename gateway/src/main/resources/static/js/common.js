@@ -9,11 +9,9 @@ $(function() {
 
 // height 100%
 function heightDetect() {
-	$(".navigation").css("height", $(window).height());
-	$(".all-inform").css("height", $(window).height());
+	$("#crm-calendar").css("height", $(window).height());
 };
 heightDetect();
-
 $(window).resize(function() {
 	heightDetect();
 });
@@ -23,7 +21,6 @@ $(window).resize(function() {
 var join = $('.acc-cloud'),
 		joinLink = $('.account'),
 		indexClick = 0;
-
 $ ( function() {
 		joinLink.click( function(event) {
 				if (indexClick === 0) {
@@ -44,5 +41,31 @@ $(document).click(function(event) {
 		event.stopPropagation();
 });
 
+
+// TIMELINE
+function isElementInViewport(el) {
+	var rect = el.getBoundingClientRect();
+	return (
+		rect.top >= 0 &&
+		rect.left >= 0 &&
+		rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+	);
+}
+
+var items = document.querySelectorAll(".timeline-wrap li");
+ 
+// code for the isElementInViewport function
+ 
+function callbackFunc() {
+	for (var i = 0; i < items.length; i++) {
+		if (isElementInViewport(items[i])) {
+			items[i].classList.add("in-view");
+		}
+	}
+}
+
+window.addEventListener("load", callbackFunc);
+window.addEventListener("scroll", callbackFunc);
 
 });
