@@ -1,11 +1,10 @@
-	<div id="particles-js"></div>
 		<form class="login-form">
 			<label class="form-title">Форма входа</label>
-			<input type="text" class="form-input" placeholder="Логин" id="login">
-			<input type="password" class="form-input" placeholder="Пароль" id="password">
+			<input type="text" class="form-input" placeholder="Логин" id="login" ng-model="userData.login">
+			<input type="password" class="form-input" placeholder="Пароль" id="password" ng-model="userData.password">
 			<label for="checkbox" id="log-check-label">
-			<input type="checkbox" id="remember"> Запомнить
+			<input type="checkbox" id="remember" ng-model="userData.remember"> Запомнить
 			</label>
-			<button type="submit" id="login-btn" class="btn btn-default">Войти</button>
-			
+			<button type="submit" id="login-btn" class="btn btn-default" ng-click="auth()">Войти</button>
+
 		</form>

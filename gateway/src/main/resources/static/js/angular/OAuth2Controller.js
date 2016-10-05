@@ -3,14 +3,14 @@
  */
 'use strict';
 
-app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, particlesFactory, $httpParamSerializerJQLike) {
+app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, particlesFactory, $httpParamSerializerJQLike, alertify, $state) {
 
     $scope.userData = {};
 
     $scope.auth = function () {
         login($scope.userData.login, $scope.userData.password);
     };
-    particlesFactory.particlesRun;
+
     console.log("hello");
 
 
@@ -35,8 +35,8 @@ app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, partic
             })
         }).success(function(data, status, headers, config) {
             sessionStorage.setItem("token", data.access_token);
-            console.log(data.access_token);
             getCurrentAccount();
+            //alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + tokenFactory.getOauthTokenFromSession + "</b>");
 
         }).error(function(data, status, headers, config) {
             alertify.error("Invalid login: <b style='color: #3c3c3c'>"+login+"</b> or password: <b style='color: #3c3c3c'>"+password+"</b> <br/> status " + status);
@@ -56,9 +56,8 @@ app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, partic
                 url: '/uaa/users/current',
                 headers: {'Authorization': 'Bearer ' + token}
             }).success(function (data, status, headers, config) {
-                alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + tokenFactory.getOauthTokenFromSession + "</b>");
-                window.location.replace("/index.html");
-                console.log(data);
+                //alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + tokenFactory.getOauthTokenFromSession + "</b>");
+                $state.go('clients');
             }).error(function (status) {
                 tokenFactory.removeOauthTokenFromSession;
                 alertify.error("Access is denied " + status);

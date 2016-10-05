@@ -1,8 +1,12 @@
 app.factory('particlesFactory', function ($rootScope) {
 
+    function particlesRefresh() {
+        window.pJSDom[0].pJS.fn.particlesRefresh;
+    }
 
     return {
-        particlesRun: new particlesJS('particles-js',
+        particlesRefresh: particlesRefresh(),
+        particlesRun: particlesJS('particles-js',
 
             {
                 "particles": {

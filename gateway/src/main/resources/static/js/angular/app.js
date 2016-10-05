@@ -2,7 +2,7 @@
  * Created by root on 12.09.2016.
  */
 'use strict';
-var app = angular.module('app', ['ui.router']);
+var app = angular.module('app', ['ui.router', 'ngAlertify']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
@@ -14,7 +14,8 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 url: '/',
                 views: {
                     'headerLayout': {
-                        templateUrl: 'template/layout/loadHeader.html'
+                        templateUrl: 'template/layout/loadHeader.html',
+                        controller: 'LoadController'
                     },
                     'footerLayout': {
                         templateUrl: 'template/layout/loadFooter.html'
@@ -25,7 +26,8 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 url: '/sign-in',
                 views: {
                     'headerLayout': {
-                        templateUrl: 'template/layout/login/loginHeader.html'
+                        templateUrl: 'template/layout/login/loginHeader.html',
+                        controller: 'LoadController'
                     },
                     'footerLayout': {
                         templateUrl: 'template/layout/login/loginFooter.html'
@@ -39,8 +41,8 @@ app.config(['$stateProvider', '$urlRouterProvider',
 
             })
             .state('clients', {
-                url: '/clients',
-                view: {
+                url: '/cl',
+                views: {
                     'headerLayout': {
                         templateUrl: 'template/layout/appHeader.html'
                     },
