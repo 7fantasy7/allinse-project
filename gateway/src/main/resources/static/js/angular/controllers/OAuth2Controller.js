@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, particlesFactory, $httpParamSerializerJQLike, alertify, $state) {
+app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, $httpParamSerializerJQLike, alertify, $state) {
 
     $scope.userData = {};
 
@@ -34,7 +34,8 @@ app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, partic
                 grant_type: 'password'
             })
         }).success(function(data, status, headers, config) {
-            sessionStorage.setItem("token", data.access_token);
+            tokenFactory.setOauthTokenFromSession(data.access_token);
+            console.log(tokenFactory.getOauthTokenFromSession());
             getCurrentAccount();
             //alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + tokenFactory.getOauthTokenFromSession + "</b>");
 
@@ -46,20 +47,19 @@ app.controller('OAuth2Controller', function ($scope, $http, tokenFactory, partic
     }
 
     function getCurrentAccount() {
+        
+        console.log(tokenFactory.getOauthTokenFromSession());
 
-        var token = tokenFactory.getOauthTokenFromSession;
-        console.log(token);
-
-        if(token) {
+        if(tokenFactory.getOauthTokenFromSession()) {
             $http({
                 method: 'GET',
                 url: '/uaa/users/current',
-                headers: {'Authorization': 'Bearer ' + token}
+                headers: {'Authorization': 'Bearer ' + tokenFactory.getOauthTokenFromSession()}
             }).success(function (data, status, headers, config) {
-                //alertify.success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + tokenFactory.getOauthTokenFromSession + "</b>");
-                $state.go('clients');
-            }).error(function (status) {
-                tokenFactory.removeOauthTokenFromSession;
+                alertify.delay(2000).success("Success! OAuth2 your token = <b style='color: #3c3c3c'>" + tokenFactory.getOauthTokenFromSession() + "</b>");
+                $state.go('loadApp');
+            }).error(function (data, status, headers, config) {
+                //tokenFactory.removeOauthTokenFromSession;
                 alertify.error("Access is denied " + status);
             });
         }

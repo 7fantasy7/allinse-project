@@ -4,6 +4,13 @@
 'use strict';
 var app = angular.module('app', ['ui.router', 'ngAlertify']);
 
+app.run( ['$rootScope', '$state', '$stateParams',
+    function ($rootScope,   $state,   $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+    }
+]);
+
 app.config(['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
 
@@ -26,8 +33,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 url: '/sign-in',
                 views: {
                     'headerLayout': {
-                        templateUrl: 'template/layout/login/loginHeader.html',
-                        controller: 'LoadController'
+                        templateUrl: 'template/layout/login/loginHeader.html'
                     },
                     'footerLayout': {
                         templateUrl: 'template/layout/login/loginFooter.html'
