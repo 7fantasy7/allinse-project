@@ -72,48 +72,6 @@
                     <finalName>${project.name}</finalName>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.samaxes.maven</groupId>
-                <artifactId>minify-maven-plugin</artifactId>
-                <version>1.7.4</version>
-                <executions>
-                    <execution>
-                        <id>default-minify</id>
-                        <phase>process-resources</phase>
-                        <configuration>
-                            <charset>UTF-8</charset>
-                            <webappSourceDir>src/main/resources</webappSourceDir>
-                            <webappTargetDir>target/classes</webappTargetDir>
-                            <cssSourceDir>static/css</cssSourceDir>
-                            <cssSourceIncludes>
-                                <cssSourceInclude>particles.css</cssSourceInclude>
-                                <cssSourceInclude>style.css</cssSourceInclude>
-                                <cssSourceInclude>bootstrap/bootstrap.css</cssSourceInclude>
-                            </cssSourceIncludes>
-                            <cssTargetDir>static/css</cssTargetDir>
-                            <cssFinalFile>styles.css</cssFinalFile>
-
-                            <jsSourceDir>static/js</jsSourceDir>
-                            <jsSourceIncludes>
-                                <jsSourceInclude>particles/app.js</jsSourceInclude>
-                                <jsSourceInclude>angular/**</jsSourceInclude>
-                            </jsSourceIncludes>
-                            <jsSourceExcludes>
-                                <jsSourceExclude>angular/*.min.js</jsSourceExclude>
-                            </jsSourceExcludes>
-
-                            <jsTargetDir>static/js</jsTargetDir>
-                            <jsFinalFile>scripts.js</jsFinalFile>
-
-                            <jsEngine>CLOSURE</jsEngine>
-                        </configuration>
-                        <goals>
-                            <goal>minify</goal>
-                        </goals>
-                    </execution>
-                     <!--more execution statements-->
-                </executions>
-            </plugin>
         </plugins>
     </build>
 </project>
