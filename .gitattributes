@@ -1,7 +1,7 @@
-**.js linguist-vendored=false
-**.css linguist-vendored=false
-**.html linguist-vendored=false
-/gateway/static/js/**.js linguist-vendored=false
-/gateway/static/css/**.css linguist-vendored=false
-/gateway/static/template/**.html linguist-vendored=false
-/gateway/static/**.html linguist-vendored=false
+*.js linguist-vendored=false
+*.css linguist-vendored=false
+*.html linguist-vendored=false
+/gateway/static/js/*.js linguist-vendored=false
+/gateway/static/css/*.css linguist-vendored=false
+/gateway/static/template/*.html linguist-vendored=false
+/gateway/static/*.html linguist-vendored=false
