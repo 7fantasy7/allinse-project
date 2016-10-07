@@ -1,4 +1,4 @@
-gateway/src/resources/static/* linguist-vendored
+gateway/src/main/resources/static/* linguist-vendored
 *.js linguist-vendored=false
 *.css linguist-vendored=false
 *.html linguist-vendored=false
