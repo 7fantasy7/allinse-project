@@ -1,4 +1,4 @@
 gateway/src/main/resources/static/* linguist-vendored
-*.js linguist-vendored=false
-*.css linguist-vendored=false
-*.html linguist-vendored=false
+(\.|-)min\.(js|css)$ linguist-vendored=false
+([^\s]*)import\.(css|less|scss|styl)$ linguist-vendored=false
+(^|/)angular([^.]*)\.js$ linguist-vendored=false
