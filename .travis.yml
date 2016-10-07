@@ -12,7 +12,7 @@ env:
     - COMMIT=${TRAVIS_COMMIT::7}
 
 after_success:
-# notify Docker Hub to make a new build
+# notify Docker Hub to make a new build || try 1
 - >
   [ "$TRAVIS_BRANCH" == "master" ]
   && curl -X POST -H "Content-Type: application/json"
