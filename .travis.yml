@@ -20,31 +20,31 @@ after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
   # CONFIG
-  - export CONFIG=allinse-project/config
+  - export CONFIG=allinse/config
   - docker build -t $CONFIG:$COMMIT ./config
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
 
   # EUREKA
-  - export EUREKA=allinse-project/eureka
+  - export EUREKA=allinse/eureka
   - docker build -t $EUREKA:$COMMIT ./eureka
   - docker tag $EUREKA:$COMMIT $EUREKA:$TAG
   - docker push $EUREKA
 
   # GATEWAY
-  - export GATEWAY=allinse-project/gateway
+  - export GATEWAY=allinse/gateway
   - docker build -t $GATEWAY:$COMMIT ./gateway
   - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
   - docker push $GATEWAY
 
   # OAUTH SERVICE
-  - export OAUTH_SERVICE=allinse-project/oauth-service
+  - export OAUTH_SERVICE=allinse/oauth-service
   - docker build -t $OAUTH_SERVICE:$COMMIT ./oauth-service
   - docker tag $OAUTH_SERVICE:$COMMIT $OAUTH_SERVICE:$TAG
   - docker push $OAUTH_SERVICE
 
   # PERSONNEL
-  - export PERSONNEL=allinse-project/personnel
+  - export PERSONNEL=allinse/personnel
   - docker build -t $PERSONNEL:$COMMIT ./personnel
   - docker tag $PERSONNEL:$COMMIT $PERSONNEL:$TAG
   - docker push $PERSONNEL
