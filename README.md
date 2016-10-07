@@ -1,2 +1,3 @@
 # ALLinSE opensource CRM system
-![Alt Text](https://travis-ci.org/ChristianLisov/allinse-project.svg?branch=master)
+
+[![Build Status](https://travis-ci.org/ChristianLisov/allinse-project.svg?branch=master)](https://travis-ci.org/ChristianLisov/allinse-project)
