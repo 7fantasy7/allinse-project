@@ -1,7 +1,7 @@
 version: '2'
 services:
   config:
-    image: allinse-docker/config
+    image: allinse/config
     restart: always
     ports:
           - 8888:8888
@@ -11,7 +11,7 @@ services:
         max-file: "10"
 
   eureka:
-    image: allinse-docker/eureka
+    image: allinse/eureka
     restart: always
     ports:
       - 8761:8761
@@ -21,7 +21,7 @@ services:
         max-file: "10"
 
   gateway:
-    image: allinse-docker/gateway
+    image: allinse/gateway
     restart: always
     ports:
       - 4000:4000
@@ -31,7 +31,7 @@ services:
         max-file: "10"
 
   oauth-service:
-    image: allinse-docker/oauth-service
+    image: allinse/oauth-service
     restart: always
     ports:
           - 5000:5000
@@ -41,7 +41,7 @@ services:
         max-file: "10"
 
   personnel:
-    image: allinse-docker/personnel
+    image: allinse/personnel
     restart: always
     ports:
       - 6000:6000
