@@ -1,2 +1,2 @@
 # allinse-project
-https://travis-ci.org/ChristianLisov/allinse-project.svg?branch=master
+![Alt Text](https://travis-ci.org/ChristianLisov/allinse-project.svg?branch=master)
