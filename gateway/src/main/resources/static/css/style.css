@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:400';
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic,cyrillic-ext';
 
 
 /***********************************
@@ -15,6 +15,7 @@
 
 body {
 	font-family: Roboto, sans-serif;
+	font-weight: 400;
 	margin: 0;
 	padding: 0;
 }
@@ -495,7 +496,7 @@ h4{
 	margin: 0 auto;
 	margin-top: 100px;
 	font-family: 'Open Sans', sans-serif;
-	height: 100vh;
+	min-height: 100vh;
 }
 #inform-about, #user-interface, #left-table {
 	margin-bottom: 6px;
