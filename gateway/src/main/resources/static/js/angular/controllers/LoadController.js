@@ -5,7 +5,7 @@
 app.controller('LoadController', function ($scope, tokenFactory, $timeout, $state) {
     $timeout(function(){
         if(tokenFactory.getOauthTokenFromSession()!=null){
-                $state.go('finance');
+                $state.go('clients');
             } else {
             $state.go('signin');
         }
