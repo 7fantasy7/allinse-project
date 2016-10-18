@@ -23,7 +23,7 @@ function getDateFromCell(td, calInstance){
 	}
 // Сортировка
 $('ol#sortable-events').sortable({
-	helper: 'clone',        
+	helper: 'clone',
 	placeholder: 'placeholder',
 		start: function(ev, ui) {
 		// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
@@ -34,20 +34,20 @@ $('ol#sortable-events').sortable({
 			end: 				new Date("2013-02-18T18:00:00"),//"2013-02-18T18:00:00",//day,
 				borderColor: 		$(ui.item).css('background-color'),
 				textColor: 			$(ui.item).css('color'),
-			allDay: true 
+			allDay: true
 			};
-	
+
 		// store the Event Object in the DOM element so we can get to it later
 		$(ui.item).data('eventObject', eventObject);
 		$(ui.item).data('dropped', false);
 
-				return  true;      
+				return  true;
 				},
 		stop: function(ev, ui) {
 			// Restore place of Event Object if dropped
 		if ( $(ui.draggable).data('dropped') == true ) {
-			$('ol#sortable-events').nestedSortable('cancel'); 
-			$(ui.draggable).data('dropped') = false ;
+			$('ol#sortable-events').nestedSortable('cancel');
+			$(ui.draggable).data('dropped') == false;
 			}
 			}
 	}).disableSelection();
