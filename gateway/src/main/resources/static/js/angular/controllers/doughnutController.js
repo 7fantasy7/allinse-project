@@ -1,6 +1,4 @@
-/**
- * Created by root on 05.10.2016.
- */
+/*** Created by asarieria on 19.10.2016. ***/
 'use strict';
 app.controller("doughnutController", function ($scope) {
     $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
