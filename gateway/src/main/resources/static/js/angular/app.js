@@ -2,7 +2,7 @@
  * Created by root on 12.09.2016.
  */
 'use strict';
-var app = angular.module('app', ['ui.router', 'ngAlertify', 'chart.js']);
+var app = angular.module('app', ['ui.router', 'ngAlertify']);
 
 app.run( ['$rootScope', '$state', '$stateParams',
     function ($rootScope,   $state,   $stateParams) {
